@@ -1,0 +1,264 @@
+<div class="row" *ngIf="!rest">
+    <div class="col-md-4" *ngFor="let c of phoneCompare;let j=index;">
+        <img src="assets/img/{{c.imagePath}}.jpg" alt="">
+        <br>Model: {{c.model}}
+        <br> Memory: {{c.memory}}
+        <br>Ram: {{c.ram}}
+        <br>Display: {{c.display}}
+        <br>Front Camera: {{c.frontCamera}}
+        <br>Back Camera: {{c.backCamera}}
+        <br>Battery: {{c.battery}}
+        <br>Price: ${{c.price}}
+        <div *ngFor="let ar of avgratingArr;let i=index">
+            <div *ngIf="j==i">
+                <h5 *ngIf="ar>0">average rating: {{ar | number : '1.1-1'}}</h5>
+                <h5 *ngIf="ar<1 ">Not rated yet</h5> 
+                <span *ngIf="ar>0" class="stars alignright">
+                <span [ngStyle]="{ 'width': getStars(ar) }"></span>
+                </span>
+            </div>     
+        </div>
+    </div>
+</div>
+
+<button style="margin-bottom:10px;" *ngIf="phoneCompare.length>0 && !rest" class="btn btn-primary"  (click)="reset()"> Reset Compare</button>
+<hr>
+<!-- <input [(ngModel)]="term" placeholder="search by model"> -->
+<div class="row">
+    <div class="col-md-6" style="float:left;">
+        <input [(ngModel)]="term" placeholder="search by model" (click)="hidee()"><button type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div *ngFor="let brand of brands;let i=index">
+            <div *ngFor="let phone of brand['phones'] | filter : term;let j=index">
+                <a (click)="bid(brand['phones'].indexOf(phone),i)" *ngIf="!hide">
+                    <img src="assets/img/{{phone.imagePath}}.jpg" alt="" style="margin-top:10px;">
+                    <br> Model: {{phone.model}}
+                    <br>Memory: {{phone.memory}} GB
+                    <br>Ram: {{phone.ram}} GB
+                    <br>Display: {{phone.display}} inch,LED
+                    <br>Price: ${{phone.price}}
+                </a>
+            </div>
+        </div>
+        <div class="col-md-12" *ngIf="hide">
+                <img src="assets/img/{{phone.imagePath}}.jpg" alt=""style="margin-top:10px;margin-bottom:10px;">
+                <br>
+                <table>
+                    <tr>
+                      <td>
+                        <h6> Model </h6>
+                      </td>
+                      <td>
+                        <h6> {{phone.model}} </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6> Ram </h6>
+                      </td>
+                      <td>
+                        <h6> {{phone.ram}} GB </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6> Memory </h6>
+                      </td>
+                      <td>
+                        <h6> {{phone.memory}} GB </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6> Display </h6>
+                      </td>
+                      <td>
+                        <h6> {{phone.display}} inch,LED </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6> Front Camera </h6>
+                      </td>
+                      <td>
+                        <h6> {{phone.frontCamera}} MP </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6> Back Camera </h6>
+                      </td>
+                      <td>
+                        <h6> {{phone.backCamera}} MP </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6> OS </h6>
+                      </td>
+                      <td>
+                        <h6> {{phone.os}} </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6> CPU </h6>
+                      </td>
+                      <td>
+                        <h6> {{phone.cpu}} </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6> Battery </h6>
+                      </td>
+                      <td>
+                        <h6> {{phone.battery}} mhz </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6> Price </h6>
+                      </td>
+                      <td>
+                        <h6>${{phone.price}} </h6>
+                      </td>
+                    </tr>
+                  </table>
+                <!-- <br> Model: {{phone.model}}
+                <br> Ram: {{phone.ram}} GB
+                <br> Memory: {{phone.memory}} GB
+                <br> Display: {{phone.display}} inch,LED
+                <br> FrontCamera: {{phone.frontCamera}} MP
+                <br> BackCamera: {{phone.backCamera}} MP
+                <br> OS: {{phone.os}}
+                <br> CPU: {{phone.cpu}}
+                <br> Battery: {{phone.battery}} mhz
+                <br> Price: ${{phone.price}} -->
+                <br>
+                <h5 *ngIf="avgrating1>0">average rating: {{avgrating1 | number : '1.1-1'}}</h5>
+                <h5 *ngIf="avgrating1<1 ">Not rated yet</h5> 
+                <span *ngIf="avgrating1>0" class="stars alignright">
+                <span [ngStyle]="{ 'width': getStars(avgrating1) }"></span>
+              </span>
+                <br>
+            </div>
+    </div>
+    <div class="col-md-6" style="float:left;">
+            <input [(ngModel)]="termm" placeholder="search by model" (click)="hidee2()"><button type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <div *ngFor="let brand of brands;let i=index">
+                <div *ngFor="let phone of brand['phones'] | cfilter : termm;let j=index">
+                    <a  (click)="bid2(brand['phones'].indexOf(phone),i)" *ngIf="!hide2">
+                        <img src="assets/img/{{phone.imagePath}}.jpg" alt="" style="margin-top:10px;">
+                        <br> Model: {{phone.model}} 
+                        <br>Memory: {{phone.memory}} GB
+                        <br>Ram: {{phone.ram}} GB
+                        <br>Display: {{phone.display}} inch,LED
+                        <br>Price: ${{phone.price}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-12" *ngIf="hide2">
+                    <img src="assets/img/{{phone2.imagePath}}.jpg" alt=""style="margin-top:10px;margin-bottom:10px;">
+                    <br>
+                    <table>
+                        <tr>
+                          <td>
+                            <h6> Model </h6>
+                          </td>
+                          <td>
+                            <h6> {{phone2.model}} </h6>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6> Ram </h6>
+                          </td>
+                          <td>
+                            <h6> {{phone2.ram}} GB </h6>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6> Memory </h6>
+                          </td>
+                          <td>
+                            <h6> {{phone2.memory}} GB </h6>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6> Display </h6>
+                          </td>
+                          <td>
+                            <h6> {{phone2.display}} inch,LED </h6>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6> Front Camera </h6>
+                          </td>
+                          <td>
+                            <h6> {{phone2.frontCamera}} MP </h6>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6> Back Camera </h6>
+                          </td>
+                          <td>
+                            <h6> {{phone2.backCamera}} MP </h6>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6> OS </h6>
+                          </td>
+                          <td>
+                            <h6> {{phone2.os}} </h6>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6> CPU </h6>
+                          </td>
+                          <td>
+                            <h6> {{phone2.cpu}} </h6>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6> Battery </h6>
+                          </td>
+                          <td>
+                            <h6> {{phone2.battery}} mhz </h6>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h6> Price </h6>
+                          </td>
+                          <td>
+                            <h6>${{phone2.price}} </h6>
+                          </td>
+                        </tr>
+                      </table>
+                    <!-- <br> Model: {{phone2.model}}
+                    <br> Ram: {{phone2.ram}} GB
+                    <br> Memory: {{phone2.memory}} GB
+                    <br> Display: {{phone2.display}} inch,LED
+                    <br> FrontCamera: {{phone2.frontCamera}} MP
+                    <br> BackCamera: {{phone2.backCamera}} MP
+                    <br> OS: {{phone2.os}}
+                    <br> CPU: {{phone2.cpu}}
+                    <br> Battery: {{phone2.battery}} mhz
+                    <br> Price: ${{phone2.price}} -->
+                    <br>
+                    <h5 *ngIf="avgrating2>0">average rating: {{avgrating2 | number : '1.1-1'}}</h5>
+                    <h5 *ngIf="avgrating2<1 ">Not rated yet</h5> 
+                    <span *ngIf="avgrating2>0" class="stars alignright">
+                    <span [ngStyle]="{ 'width': getStars(avgrating2) }"></span>
+                  </span>
+                    <br>
+            </div>
+    </div>
+</div>

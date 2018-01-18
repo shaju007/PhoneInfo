@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-12" *ngFor="let brand of brands;let i=index">
+    <div *ngFor="let phone of brand['phones'];let j=index">
+      <div *ngFor="let fav of favourite1">
+        <div style="border-bottom:1px solid black;" *ngIf="phone.model==fav.model && userID==fav.uid">
+          <a [routerLink]="['/pdetail/'+j]" (click)="bid(fav.bid)">
+            <img style="margin-bottom:30px;margin-top:20px;" src="assets/img/{{phone.imagePath}}.jpg" alt="">
+            <div style="float:right;width:200px;margin-right:210px;margin-top:30px;">
+              Model: {{phone.model}}
+              <br> Memory: {{phone.memory}}
+              <br> Ram: {{phone.ram}}
+              <br> Display: {{phone.display}}
+              <br> Price: ${{phone.price}}
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

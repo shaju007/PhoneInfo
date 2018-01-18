@@ -1,0 +1,49 @@
+<hr>
+<h3 style="margin-top:10px;">News Article</h3>
+<hr>
+<div style="cursor:pointer;" class="row" *ngFor="let new of news;let i=index">
+    <div class="col-md-12" style="cursor:pointer;" [routerLink]="['/newsdetail/'+i]" style="width:400px;">
+      <div class="card" *ngIf="i<5" style="margin-bottom:20px;">
+        <div class="card-header">
+          <h6>{{(new.title.length>50)? ( new.title | slice:0:50)+' ...':(new.title) }}</h6>
+        </div>
+        <div class="card-block">
+          <p class="card-text">{{(new.body.length>150)? ( new.body | slice:0:150)+' ...':(new.body)}}</p>
+        </div>
+      </div>
+        
+    </div>
+    
+        <!-- <ng-template #seeall style="margin-right:50px;">
+            <button type="button" style="margin-right:15px;margin-left:10px;" *ngIf="i==9" class="btn btn-primary btn-block " routerLink="/news"> See All News</button>
+            <br>
+        </ng-template> -->
+</div>
+<div style="position:sticky;top:70px;margin-bottom:30px;">
+    <div class="card" style="cursor:pointer;" [routerLink]="['/newsdetail/5']">
+      <div class="card-header">
+        <h6>{{(news[5].title.length>50)? ( news[5].title | slice:0:50)+' ...':(news[5].title) }}</h6>
+      </div>
+      <div class="card-block">
+        <p class="card-text">{{(news[5].body.length>150)? ( news[5].body | slice:0:150)+' ...':(news[5].body)}}</p>
+      </div>
+    </div>
+    <br>
+    <div class="card" style="cursor:pointer;" [routerLink]="['/newsdetail/6']">
+        <div class="card-header">
+          <h6>{{(news[6].title.length>50)? ( news[6].title | slice:0:50)+' ...':(news[6].title) }}</h6>
+        </div>
+        <div class="card-block">
+          <p class="card-text">{{(news[6].body.length>150)? ( news[6].body | slice:0:150)+' ...':(news[6].body)}}</p>
+        </div>
+      </div>
+      <button type="button" style="margin-top:20px;margin-left:0px;cursor:pointer;"  class="btn btn-primary btn-block " routerLink="/news"> See All News</button>
+</div>
+
+
+
+
+  
+
+
+

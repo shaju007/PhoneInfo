@@ -1,0 +1,100 @@
+<div class="row" style="margin-left:10px;">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <!-- <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success" [disabled]=!recipeForm.valid>Save</button>
+          <button  type="button" class="btn btn-success" (click)="onAddPhone()">Add Phone</button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath"><h4>Image</h4></label><br>
+            <!-- <input type="file" name="imagePath" id="imagePath" formControlName="imagePath" class="form-control" > -->
+           
+            <input type="file" onchange="document.getElementById('imagePath').value = this.value.split('\\').pop().split('/').pop().replace(/\.\w+$/, ' ')">
+            <input type="text" name="imagePath" id="imagePath" formControlName="imagePath" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="model"><h4>Model</h4></label>
+            <input type="text" id="model" formControlName="model" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="body"><h4>Body</h4></label>
+            <input type="text" id="body" formControlName="body" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="performance"><h4>performance</h4></label>
+            <input type="text" id="performance" formControlName="performance" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="perImagePath"><h4>Image</h4></label><br>
+            <!-- <input type="file" name="imagePath" id="imagePath" formControlName="imagePath" class="form-control" > -->
+           
+            <input type="file" onchange="document.getElementById('perImagePath').value = this.value.split('\\').pop().split('/').pop().replace(/\.\w+$/, ' ')">
+            <input type="text" name="perImagePath" id="perImagePath" formControlName="perImagePath" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="hardware"><h4>hardware</h4></label>
+            <input type="text" id="hardware" formControlName="hardware" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="software"><h4>software</h4></label>
+            <input type="text" id="software" formControlName="software" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="display"><h4>display</h4></label>
+            <input type="text" id="display" formControlName="display" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="camera"><h4>camera</h4></label>
+            <input type="text" id="camera" formControlName="camera" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="battery"><h4>battery</h4></label>
+            <input type="text" id="battery" formControlName="battery" class="form-control">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]=!recipeForm.valid>Save</button>
+    </form>
+  </div>
+</div>

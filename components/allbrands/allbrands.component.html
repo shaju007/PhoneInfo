@@ -1,0 +1,29 @@
+
+<!-- <button *ngIf="authService.isAuthenticated() && admin"  type="button" class="btn btn-success" (click)="addBrand()">Add Brand</button> -->
+<div *ngIf="showadd" class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label style="margin-left: 30px;" for="name"><h4>Name</h4></label>
+            <input style="margin-left: 30px;" type="text" id="name" formControlName="name" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button  type="submit" class="btn btn-success" [disabled]=!recipeForm.valid>Save</button>
+          </div>
+        </div>
+      </div>
+      </form>
+      </div>
+      </div>
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let brand of brands;let i=index">
+      <a  [routerLink]="['/slbrand/'+i]">{{brand.name}}</a>
+  </div>
+  
+</div>

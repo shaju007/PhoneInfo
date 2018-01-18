@@ -1,0 +1,200 @@
+
+    
+      <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-xs-12">
+            <!-- <button type="submit" class="btn btn-success" [disabled]=!recipeForm.valid>Save</button> -->
+            <button *ngIf="new && addp" type="button" class="btn btn-success" (click)="onAddPhone()">Add Phone</button>
+            <!-- <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button> -->
+          </div>
+        </div>
+        <div class="row" style="margin-left:1px;">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="name"><h4>Name</h4></label>
+              <input type="text" id="name" formControlName="name" class="form-control">
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="imagePath">Image Url</label>
+              <input type="text" id="imagePath" formControlName="imagePath" class="form-control" #imagePath>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="row">
+          <div class="col-xs-12">
+            <img [src]="imagePath.value" class="image-responsive">
+          </div>
+        </div> -->
+        <div style="margin-left:10px;" class="row">
+          <div class="col-xs-12" formArrayName="phones">
+            <div class="row" *ngFor="let phoneCtrl of recipeForm.get('phones').controls;let i=index" [formGroupName]="i" style="margin-top:10px;">
+              <div *ngIf="id==i && edit;">
+              
+                 <div class="col-xs-2">
+                    <label for="imagePath"><h4>Image</h4></label><br>
+                    <input type="file" onchange="document.getElementById('imagePath').value = this.value.split('\\').pop().split('/').pop().replace(/\.\w+$/, ' ')">
+                    <input type="text" name="imagePath" id="imagePath" formControlName="imagePath" class="form-control">
+                    </div>
+                  <div class="col-xs-2">
+                    <label for="memory"><h4>Memory</h4></label>
+                    <input type="number" class="form-control" formControlName='memory'>
+                  </div>
+              <div class="col-xs-8">
+                <label for="model"><h4>Model</h4></label>
+                <input type="text" class="form-control" formControlName='model'>
+              </div>
+              <div class="col-xs-2">
+                <label for="ram"><h4>Ram</h4></label>
+                <input type="number" class="form-control" formControlName='ram'>
+              </div>
+              <div class="col-xs-2">
+                <label for="display"><h4>display</h4></label>
+                <input type="number" class="form-control" formControlName='display'>
+              </div>
+              <div class="col-xs-2">
+                <label for="frontCamera"><h4>frontCamera</h4></label>
+                <input type="number" class="form-control" formControlName='frontCamera'>
+              </div>
+              <div class="col-xs-2">
+                <label for="backCamera"><h4>backCamera</h4></label>
+                <input type="number" class="form-control" formControlName='backCamera'>
+              </div>
+              <div class="col-xs-8">
+                <label for="os"><h4>os</h4></label>
+                <input type="text" class="form-control" formControlName='os'>
+              </div>
+              <div class="col-xs-8">
+                <label for="cpu"><h4>cpu</h4></label>
+                <input type="text" class="form-control" formControlName='cpu'>
+              </div>
+              <div class="col-xs-2">
+                <label for="battery"><h4>battery</h4></label>
+                <input type="number" class="form-control" formControlName='battery'>
+              </div>
+              <div class="col-xs-2">
+                <label for="price"><h4>Price</h4></label>
+                <input type="number" class="form-control" formControlName='price'>
+              </div>
+
+              
+              
+              <!-- <div class="col-xs-2" *ngIf="id==i">
+                <button style="margin-top:5px;" type="button" class="btn btn-danger" (click)="onDeleteIngredient(id)">X</button>
+              </div> -->
+            </div>
+            <div *ngIf="new && !add" [hidden]="true">
+              
+              <div class="col-xs-2">
+                  <label for="imagePath"><h4>Image</h4></label><br>
+                  <input type="file" onchange="document.getElementById('imagePath').value = this.value.split('\\').pop().split('/').pop().replace(/\.\w+$/, ' ')">
+                  <input type="text" name="imagePath" id="imagePath" formControlName="imagePath" class="form-control">
+                  </div>
+                    <div class="col-xs-2">
+                      <label for="memory"><h4>Memory</h4></label>
+                      <input type="number" class="form-control" formControlName='memory'>
+                    </div>
+                <div class="col-xs-8">
+                  <label for="model"><h4>Model</h4></label>
+                  <input type="text" class="form-control" formControlName='model'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="ram"><h4>Ram</h4></label>
+                  <input type="number" class="form-control" formControlName='ram'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="display"><h4>display</h4></label>
+                  <input type="number" class="form-control" formControlName='display'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="frontCamera"><h4>frontCamera</h4></label>
+                  <input type="number" class="form-control" formControlName='frontCamera'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="backCamera"><h4>backCamera</h4></label>
+                  <input type="number" class="form-control" formControlName='backCamera'>
+                </div>
+                <div class="col-xs-8">
+                  <label for="os"><h4>os</h4></label>
+                  <input type="text" class="form-control" formControlName='os'>
+                </div>
+                <div class="col-xs-8">
+                  <label for="cpu"><h4>cpu</h4></label>
+                  <input type="text" class="form-control" formControlName='cpu'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="battery"><h4>battery</h4></label>
+                  <input type="number" class="form-control" formControlName='battery'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="price"><h4>Price</h4></label>
+                  <input type="number" class="form-control" formControlName='price'>
+                </div>
+              </div>
+              <div *ngIf="new && add && i==len || len==null">
+                  
+                <div class="col-xs-2">
+                    <label for="imagePath"><h4>Image</h4></label><br>
+                    <input type="file" onchange="document.getElementById('imagePath').value = this.value.split('\\').pop().split('/').pop().replace(/\.\w+$/, ' ')">
+                    <input type="text" name="imagePath" id="imagePath" formControlName="imagePath" class="form-control">
+                    </div>
+                    <div class="col-xs-2">
+                      <label for="memory"><h4>Memory</h4></label>
+                      <input type="number" class="form-control" formControlName='memory'>
+                    </div>
+                <div class="col-xs-8">
+                  <label for="model"><h4>Model</h4></label>
+                  <input type="text" class="form-control" formControlName='model'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="ram"><h4>Ram</h4></label>
+                  <input type="number" class="form-control" formControlName='ram'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="display"><h4>display</h4></label>
+                  <input type="number" class="form-control" formControlName='display'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="frontCamera"><h4>frontCamera</h4></label>
+                  <input type="number" class="form-control" formControlName='frontCamera'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="backCamera"><h4>backCamera</h4></label>
+                  <input type="number" class="form-control" formControlName='backCamera'>
+                </div>
+                <div class="col-xs-8">
+                  <label for="os"><h4>os</h4></label>
+                  <input type="text" class="form-control" formControlName='os'>
+                </div>
+                <div class="col-xs-8">
+                  <label for="cpu"><h4>cpu</h4></label>
+                  <input type="text" class="form-control" formControlName='cpu'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="battery"><h4>battery</h4></label>
+                  <input type="number" class="form-control" formControlName='battery'>
+                </div>
+                <div class="col-xs-2">
+                  <label for="price"><h4>Price</h4></label>
+                  <input type="number" class="form-control" formControlName='price'>
+                </div>
+              </div>
+            </div>
+            
+            <!-- <div class="row">
+              <div class="col-xs-12">
+                <button  type="button" class="btn btn-success" (click)="onAddPhone()">Add Phone</button>
+              </div>
+            </div> -->
+          </div>
+          
+               
+              
+        </div>
+        <button style="margin-top:5px;" type="submit" class="btn btn-success" [disabled]=!recipeForm.valid>Save</button>
+        
+      </form>
+    

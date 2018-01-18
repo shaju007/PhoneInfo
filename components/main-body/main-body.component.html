@@ -1,0 +1,20 @@
+
+<h4 style="float:left;margin-right:15px;">Reviews</h4><input [(ngModel)]="term" placeholder="search by model"><button type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+<button *ngIf="authService.isAuthenticated() && admin" class="btn btn-success" style="cursor:pointer;margin-left:15px;"  (click)="onAdd()">Add review</button>
+<br><br>
+    <div *ngIf="( reviews | filter: term).length === 0">
+        <h5>No Matches</h5>
+    </div>
+<div style="cursor:pointer;" class="row" *ngFor="let review of reviews | filter:term;let i=index" >
+        
+    <div class="col-md-12" [routerLink]="['/detail/'+reviews.indexOf(review)]" style="width:700px;border:1px solid grey;padding-top:10px;padding-bottom:10px;border-radius:6px;">
+      <div class="col-md-3" class="float-left" style="width:300px;margin-right:10px;">
+          <img src="assets/img/{{review.imagePath}}.jpg" class="img-fluid" style="max-height:300px;max-width:300px;margin-top:5px;margin-bottom:5px;">
+      </div>
+      <br>
+      <div class="col-md-9" class="float-left" style="width:400px;">
+          <h3>{{(review.model.length>50)? ( review.model | slice:0:50)+' ...':(review.model) }}</h3><p>{{(review.body.length>150)? ( review.body | slice:0:150)+' ...':(review.body)}}</p>
+      </div>
+    </div>
+    
+</div>

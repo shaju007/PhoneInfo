@@ -1,0 +1,51 @@
+<div class="row" style="margin-left:10px;">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- <button type="submit" class="btn btn-success" [disabled]=!recipeForm.valid>Save</button> -->
+          <!-- <button  type="button" class="btn btn-success" (click)="onAddPhone()">Add Phone</button> -->
+          <!-- <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath"><h4>Image</h4></label><br>
+            <!-- <input type="file" name="imagePath" id="imagePath" formControlName="imagePath" class="form-control" > -->
+           
+            <input type="file" onchange="document.getElementById('imagePath').value = this.value.split('\\').pop().split('/').pop().replace(/\.\w+$/, ' ')">
+            <input type="text" name="imagePath" id="imagePath" formControlName="imagePath" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="title"><h4>Title</h4></label>
+            <input type="text" id="title" formControlName="title" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="body"><h4>Body</h4></label>
+            <input type="text" id="body" formControlName="body" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea type="text" id="description" formControlName="description" class="form-control" rows="10" cols="100">
+
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]=!recipeForm.valid>Save</button>
+    </form>
+  </div>
+</div>

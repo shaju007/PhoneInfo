@@ -1,0 +1,41 @@
+<!-- <button *ngIf="authService.isAuthenticated() && admin"  class="btn btn-success" style="cursor:pointer;" (click)="onEditItem()">Edit</button> -->
+
+<div class="w3-container" style=" padding-left:0px;">
+    <button *ngIf="authService.isAuthenticated() && admin"  class="btn btn-success" style="cursor:pointer;" (click)="onEditItem()">Edit</button>
+  
+   <button *ngIf="authService.isAuthenticated() && admin" onclick="document.getElementById('id01').style.display='block'" class=" btn btn-danger" style="cursor:pointer;">Delete</button>
+ 
+   <div id="id01" class="w3-modal" >
+     <div class="w3-modal-content" style="margin-left:500px;margin-top:150px;width:300px;height:100px;">
+       <div class="w3-container" >
+         <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+         <h6>Are you sure?</h6>
+         <button *ngIf="authService.isAuthenticated() && admin" class="btn btn-danger" style=" cursor:pointer;margin-top:15px;" (click)="onDeleteItem()">Delete</button>
+         <button class="btn btn-basic" type="button"  onclick="document.getElementById('id01').style.display='none'" style="cursor:pointer;margin-top:15px;margin-left:10px;">Cancel</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+<br><br>
+<div class="row">
+  <div class="col-md-12">
+    <img src="assets/img/{{review.imagePath}}.jpg" alt="" style="max-height:300px;max-width:400px;">
+    <h3>{{review.model}}</h3>
+    <p>{{review.body}}</p>
+    <h5>Performance</h5>
+    <p>{{review.performance}}</p>
+    <img src="assets/perImg/{{review.perImagePath}}.JPG" alt="" style="max-height:500px;max-width:500px;">
+    <h5>Hardware</h5>
+    <p>{{review.hardware}}</p>
+    <h5>Software</h5>
+    <p>{{review.software}}</p>
+    <h5>Display</h5>
+    <p>{{review.display}}</p>
+    <h5>Camera</h5>
+    <p>{{review.camera}}</p>
+    <h5>Battery</h5>
+    <p>{{review.battery}}</p>
+  </div>
+  <button style="margin-left:10px;" class="btn btn-primary" (click)="goBack()">Back</button>
+</div>

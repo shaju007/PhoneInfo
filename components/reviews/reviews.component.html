@@ -1,0 +1,44 @@
+
+<div class="row" *ngFor="let email of emails;let i=index" >
+  
+     <div class="col-md-12" style="width:700px;border:1px solid grey;border-radius:8px;margin-bottom:10px;padding-top:10px;padding-bottom:10px;">
+        Name: {{email.name}}, <span><b>emailed on: {{email.date}}</b></span> <br>
+        Sender: {{email.email}} <br>
+        Subject: {{email.subject}} <br>
+        Message: {{email.message}} <br>
+        <!-- <button class="btn btn-danger" type="button"  (click)="delete(i)">Delete</button> -->
+
+        <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+        
+         
+         <div class="w3-container" style=" padding-left:0px;">
+          
+           <button onclick="document.getElementById('id01').style.display='block'" class=" btn btn-danger" style="cursor:pointer;">Delete</button>
+         
+           <div id="id01" class="w3-modal" >
+             <div class="w3-modal-content" style="margin-left:500px;margin-top:150px;width:300px;height:100px;">
+               <div class="w3-container" >
+                 <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                 <h6>Are you sure?</h6>
+                 <button type="button" class="btn btn-danger" (click)="delete(i)" style=" cursor:pointer;margin-top:15px;">Delete</button>
+                 <button class="btn btn-basic" type="button"  onclick="document.getElementById('id01').style.display='none'" style="cursor:pointer;margin-top:15px;margin-left:10px;">Cancel</button>
+               </div>
+             </div>
+           </div>
+         </div>
+         
+     </div>
+    
+ </div>
+
+
+
+
+
+ 
+ 
+ 
+ 
+
+ 
+ 

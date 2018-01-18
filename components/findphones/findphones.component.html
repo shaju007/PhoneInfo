@@ -1,0 +1,164 @@
+<div class="row">
+  <div class="col-md-5">
+      <input [(ngModel)]="term" placeholder="search by model">
+      <button type="button" style="float:left;">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+      
+  </div>
+  <div class="col-md-2">
+    <h5>OR</h5>
+  </div>
+  <div class="col-md-5">
+      
+      <button type="button" class="btn btn-basic" (click)="filter()"> Filter</button>
+  </div>
+</div>
+
+
+
+<div *ngIf="filterchk" class="row">
+  <div class="col-md-12">
+  <hr>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div>
+          <h4>Memory</h4>
+          <div *ngFor="let m of memoryFilter;let i=index">
+            <div *ngIf="i<3">
+
+              <label>
+                <input type="radio" name="filterm" (click)="updateFilter(m,i)">{{m.memory}} GB</label>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div>
+          <h4>Ram</h4>
+          <div *ngFor="let m of memoryFilter;let i=index">
+
+            <!-- <h4 *ngIf="i==3">Ram <hr></h4> -->
+            <div *ngIf="i>2">
+
+              <label>
+                <input type="radio" name="filterr" (click)="updateFilter(m,i)">{{m.ram}} GB</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+      <!-- <h4>Price Range</h4> -->
+
+      <div class="col-md-3">
+        <div>
+          <h4>Price Range</h4>
+          <div *ngFor="let p of priceFilter;let i=index">
+            <div>
+
+              <label>
+                <input type="radio" name="filterp" (click)="priceUpdFilter(p,i)">$ {{p.price-200}} - {{p.price}} </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- <div *ngFor="let r of ramFilter">
+          <input type="checkbox" [(ngModel)]="r.checked" (click)="ramupdFilter(r)">
+          <label>{{r.ram}} GB</label>
+        </div> -->
+
+
+    <h5>Filtered Phones:</h5>
+    <hr>
+    <div class="row">
+      <h5 *ngIf="filterBrands.length<1" style="padding-left:15px;">No Item</h5>
+      <div class="col-md-4" *ngFor="let phone of filterBrands">
+        <a (click)="selectedFilter(phone.model)">
+          <img src="assets/img/{{phone.imagePath}}.jpg" alt="">
+          <br> Model: {{phone.model}}
+          <br>Memory: {{phone.memory}} GB
+          <br> Ram: {{phone.ram}} GB
+          <br> Price: ${{phone.price}}
+        </a>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="selectedFilterPhone">
+    <p>Details</p>
+    <img src="assets/img/{{selectedFilterPhoneDetail.imagePath}}.jpg" alt="">
+    <br> Model:{{selectedFilterPhoneDetail.model}}
+    <br> Memory:{{selectedFilterPhoneDetail.memory}}
+    <br> ram:{{selectedFilterPhoneDetail.ram}}
+    <br> display:{{selectedFilterPhoneDetail.display}}
+    <br> frontCamera:{{selectedFilterPhoneDetail.frontCamera}}
+    <br> backCamera:{{selectedFilterPhoneDetail.backCamera}}
+    <br> battery:{{selectedFilterPhoneDetail.battery}}
+    <br> price:{{selectedFilterPhoneDetail.price}}
+    <br>
+    <h5 *ngIf="avgrating1>0">average rating: {{avgrating1 | number : '1.1-1'}}</h5>
+    <h5 *ngIf="avgrating1<1 ">Not rated yet</h5>
+    <span *ngIf="avgrating1>0" class="stars alignright">
+      <span [ngStyle]="{ 'width': getStars(avgrating1) }"></span>
+    </span>
+    <button class="btn btn-primary" (click)="compare(selectedFilterPhoneDetail)">Add to compare</button>
+    <hr>
+  </div>
+</div>
+
+
+<hr>
+<h5 style="background-color:rgb(229, 235, 235);width:110px;">All Phones:</h5>
+<hr>
+<div *ngIf="( reviews | filter: term).length === 0">
+    <h5>No Matches</h5>
+</div>
+<div class="row">
+  <div class="col-md-12" *ngFor="let brand of brands;let i=index">
+    <div *ngFor="let phone of brand['phones'] | filter : term;let j=index">
+      <div style="border-bottom:1px solid black;" class="row">
+        <div class="col-md-6">
+          <a [routerLink]="['/pdetail/'+brand['phones'].indexOf(phone)]" (click)="bid(i)">
+            <img style="margin-bottom:10px;" src="assets/img/{{phone.imagePath}}.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <a [routerLink]="['/pdetail/'+brand['phones'].indexOf(phone)]" (click)="bid(i)">
+              Model: {{phone.model}}
+              <br>Memory: {{phone.memory}}GB
+              <br>Ram: {{phone.ram}}GB
+              <br>Display: {{phone.display}} inch,LED
+              <br>Price: ${{phone.price}}
+            </a>
+            <br>
+
+          </div>
+        </div>
+
+
+        <br>
+      </div>
+      <br>
+
+
+
+
+    </div>
+
+  </div>
+
+</div>

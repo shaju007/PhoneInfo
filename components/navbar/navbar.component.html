@@ -1,0 +1,55 @@
+<div class="container" style="margin-bottom:10px;">
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" style="cursor:pointer;" routerLink="/">PhoneInfo</a>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item">
+          <a class="nav-link" style="cursor:pointer;" routerLink="">Dashboard</a>
+        </li> -->
+        <li class="nav-item" style="color:black;" routerLinkActive="active">
+          <a class="nav-link" style="cursor:pointer;color:black;" routerLink="/reviews">Reviews</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor:pointer;color:black;" routerLink="/news">News</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAuthenticated() && admin">
+          <a class="nav-link" style="cursor:pointer; color:black;" routerLink="/email">Emails </a>
+        </li>
+        <li class="nav-item" *ngIf="!admin">
+          <a class="nav-link" style="cursor:pointer; color:black;" routerLink="/compare">compare</a>
+        </li>
+        <li class="nav-item" *ngIf="!admin">
+          <a class="nav-link" style="cursor:pointer; color:black;" routerLink="/contact">Contact</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" style="cursor:pointer; color:black;" routerLink="/toprating">Top rating</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" style="cursor:pointer; color:black;" routerLink="/favourite" *ngIf="authService.isAuthenticated() && !admin">My Favourites</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li class="nav-item" style="background-color:#68ece1; border-radius: 4px;">
+            <a class="nav-link" routerLink="/signup" style="color:rgb(14, 13, 13);">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/signin" style="color:black;">Login</a>
+          </li>
+        </ng-template>
+        <li class="nav-item" style="background-color:#d42038;">
+          <a class="nav-link" style="cursor:pointer;color:white;" (click)="onLogout()" *ngIf="authService.isAuthenticated()">Logout</a>
+        </li>
+
+        <!-- <li  class="nav-item"><a class="nav-link" style="cursor:pointer;" (click)="onSaveData()" *ngIf="authService.isAuthenticated()">Save Data</a></li>
+          <li  class="nav-item"><a class="nav-link" style="cursor:pointer;" (click)="onFetchData()" *ngIf="authService.isAuthenticated()">Fetch Data</a></li>  -->
+      </ul>
+    </div>
+  </nav>
+</div>

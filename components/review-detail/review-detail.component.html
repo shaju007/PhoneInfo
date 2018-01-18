@@ -1,0 +1,33 @@
+<div *ngFor="let top of topratingarr2">
+    
+    <div *ngFor="let brand of brands;let i=index">
+        <div *ngFor="let phone of brand['phones'];let j=index">
+            <div *ngIf="top.model==phone.model">
+                    <div [routerLink]="['/pdetail/'+brand['phones'].indexOf(phone)]" (click)="bid(i)" style="cursor:pointer;border-bottom:1px solid black;" class="row">
+                            <div class="col-md-6">
+                              <a [routerLink]="['/pdetail/'+brand['phones'].indexOf(phone)]" (click)="bid(i)">
+                                <img style="margin-bottom:10px;margin-top:10px;" src="assets/img/{{phone.imagePath}}.jpg" alt="">
+                              </a>
+                            </div>
+                            <div class="col-md-6" style="margin-top:10px;">
+                              <div>
+                                <a [routerLink]="['/pdetail/'+brand['phones'].indexOf(phone)]" (click)="bid(i)">
+                                  Model: {{phone.model}}
+                                  <br>Memory: {{phone.memory}}GB
+                                  <br>Ram: {{phone.ram}}GB
+                                  <br>Display: {{phone.display}} inch,LED
+                                  <br>Price: ${{phone.price}}
+                                  <h5 style="color:black;">Average rating: {{top.avgrate2 | number : '1.1-1'}}</h5>
+                                  <!-- <h6 *ngIf="!authService.isAuthenticated()" style="color:rgb(116, 142, 190);float:right;">Log in to give rating</h6> -->
+                                  <!-- <h5 *ngIf="avgrating<1 ">Not rated yet</h5>  -->
+                                  <span class="stars alignright">
+                                  <span [ngStyle]="{ 'width': getStars(top.avgrate2) }"></span></span>
+                                </a>
+                                <br>
+                    
+                              </div>
+                            </div>
+            </div>
+        </div>
+    </div>
+</div>

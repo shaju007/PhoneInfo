@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="form-group" [ngClass]="{
+        'has-danger': email.invalid && (email.dirty || email.touched), 
+        'has-success': email.valid && (email.dirty || email.touched)
+   }">
+        <label for="email">Mail</label>
+        <input type="email" name="email" id="email" ngModel class="form-control" required pattern="[^ @]*@[^ @]*" #email="ngModel">
+        <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+          <p *ngIf="email.errors.required">Email is required</p>
+          <p *ngIf="email.errors.pattern">Email must contain at least the @ character</p>
+        </div>
+      </div>
+      <button class="btn btn-success" type="submit" [disabled]="!f.valid">Send Password reset email</button>
+    </form>
+    <div class="my-container">
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    </div>
+  </div>
+</div>

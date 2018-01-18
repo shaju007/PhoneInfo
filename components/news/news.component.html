@@ -1,0 +1,21 @@
+
+
+<h4 style="float:left;margin-right:15px;">News</h4><input [(ngModel)]="term" placeholder="search by title"><button type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+<button *ngIf="authService.isAuthenticated() && admin" class="btn btn-success" style="cursor:pointer;margin-left:15px;"  (click)="onAdd()">Add news</button>
+<br><br>
+<div *ngIf="( news | nfilter: term).length === 0">
+    <h5>No Matches</h5>
+</div>
+<div style="cursor:pointer;" class="row" *ngFor="let new of news | nfilter:term;let i=index" >
+ 
+    <div class="col-md-12" [routerLink]="['/newsdetail/'+news.indexOf(new)]" style="width:700px;border:1px solid grey; padding-top:10px;padding-bottom:10px;border-radius:6px;">
+      <div class="col-md-3" class="float-left" style="width:300px;margin-right:10px;">
+          <img src="assets/img/{{new.imagePath}}.jpg" class="img-fluid" style="max-height:300px;max-width:300px;margin-top:5px;margin-bottom:5px;">
+      </div>
+      <br>
+      <div class="col-md-9" class="float-left" style="width:400px;">
+          <h3>{{(new.title.length>50)? ( new.title | slice:0:50)+' ...':(new.title) }}</h3><p>{{(new.body.length>150)? ( new.body | slice:0:150)+' ...':(new.body)}}</p>
+      </div>
+    </div>
+</div>
+
