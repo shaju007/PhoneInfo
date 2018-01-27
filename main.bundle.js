@@ -2114,7 +2114,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/latest-device/latest-device.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<hr>\n<h3 style=\"margin-top:10px;\">News Article</h3>\n<hr>\n<div style=\"cursor:pointer;\" class=\"row\" *ngFor=\"let new of news;let i=index\">\n    <div class=\"col-md-12\" style=\"cursor:pointer;\" [routerLink]=\"['/newsdetail/'+i]\" style=\"width:400px;\">\n      <div class=\"card\" *ngIf=\"i<5\" style=\"margin-bottom:20px;\">\n        <div class=\"card-header\">\n          <h6>{{(new.title.length>50)? ( new.title | slice:0:50)+' ...':(new.title) }}</h6>\n        </div>\n        <div class=\"card-block\">\n          <p class=\"card-text\">{{(new.body.length>150)? ( new.body | slice:0:150)+' ...':(new.body)}}</p>\n        </div>\n      </div>\n        \n    </div>\n    \n        <!-- <ng-template #seeall style=\"margin-right:50px;\">\n            <button type=\"button\" style=\"margin-right:15px;margin-left:10px;\" *ngIf=\"i==9\" class=\"btn btn-primary btn-block \" routerLink=\"/news\"> See All News</button>\n            <br>\n        </ng-template> -->\n</div>\n<div style=\"position:sticky;top:70px;margin-bottom:30px;\">\n    <div class=\"card\" style=\"cursor:pointer;\" [routerLink]=\"['/newsdetail/5']\">\n      <div class=\"card-header\">\n        <h6>{{(news[5].title.length>50)? ( news[5].title | slice:0:50)+' ...':(news[5].title) }}</h6>\n      </div>\n      <div class=\"card-block\">\n        <p class=\"card-text\">{{(news[5].body.length>150)? ( news[5].body | slice:0:150)+' ...':(news[5].body)}}</p>\n      </div>\n    </div>\n    <br>\n    <div class=\"card\" style=\"cursor:pointer;\" [routerLink]=\"['/newsdetail/6']\">\n        <div class=\"card-header\">\n          <h6>{{(news[6].title.length>50)? ( news[6].title | slice:0:50)+' ...':(news[6].title) }}</h6>\n        </div>\n        <div class=\"card-block\">\n          <p class=\"card-text\">{{(news[6].body.length>150)? ( news[6].body | slice:0:150)+' ...':(news[6].body)}}</p>\n        </div>\n      </div>\n      <button type=\"button\" style=\"margin-top:20px;margin-left:0px;cursor:pointer;\"  class=\"btn btn-primary btn-block \" routerLink=\"/news\"> See All News</button>\n</div>\n\n\n\n\n  \n\n\n\n"
+module.exports = "<hr>\n<h3 *ngIf=\"innerWidth>700\" style=\"margin-top:10px;\">News Article</h3>\n<hr>\n<div *ngIf=\"innerWidth>700\">\n  <div style=\"cursor:pointer;\" class=\"row\" *ngFor=\"let new of news;let i=index\">\n    <div class=\"col-md-12\" style=\"cursor:pointer;\" [routerLink]=\"['/newsdetail/'+i]\" style=\"width:400px;\">\n      <div class=\"card\" *ngIf=\"i<5\" style=\"margin-bottom:20px;\">\n        <div class=\"card-header\">\n          <h6>{{(new.title.length>50)? ( new.title | slice:0:50)+' ...':(new.title) }}</h6>\n        </div>\n        <div class=\"card-block\">\n          <p class=\"card-text\">{{(new.body.length>150)? ( new.body | slice:0:150)+' ...':(new.body)}}</p>\n        </div>\n      </div>\n        \n    </div>\n    \n        <!-- <ng-template #seeall style=\"margin-right:50px;\">\n            <button type=\"button\" style=\"margin-right:15px;margin-left:10px;\" *ngIf=\"i==9\" class=\"btn btn-primary btn-block \" routerLink=\"/news\"> See All News</button>\n            <br>\n        </ng-template> -->\n</div>\n</div>\n\n<div *ngIf=\"innerWidth>700\">\n  <div style=\"position:sticky;top:70px;margin-bottom:30px;\">\n    <div class=\"card\" style=\"cursor:pointer;\" [routerLink]=\"['/newsdetail/5']\">\n      <div class=\"card-header\">\n        <h6>{{(news[5].title.length>50)? ( news[5].title | slice:0:50)+' ...':(news[5].title) }}</h6>\n      </div>\n      <div class=\"card-block\">\n        <p class=\"card-text\">{{(news[5].body.length>150)? ( news[5].body | slice:0:150)+' ...':(news[5].body)}}</p>\n      </div>\n    </div>\n    <br>\n    <div class=\"card\" style=\"cursor:pointer;\" [routerLink]=\"['/newsdetail/6']\">\n        <div class=\"card-header\">\n          <h6>{{(news[6].title.length>50)? ( news[6].title | slice:0:50)+' ...':(news[6].title) }}</h6>\n        </div>\n        <div class=\"card-block\">\n          <p class=\"card-text\">{{(news[6].body.length>150)? ( news[6].body | slice:0:150)+' ...':(news[6].body)}}</p>\n        </div>\n      </div>\n      <button type=\"button\" style=\"margin-top:20px;margin-left:0px;cursor:pointer;\"  class=\"btn btn-primary btn-block \" routerLink=\"/news\"> See All News</button>\n</div>\n</div>\n\n\n\n\n\n\n  \n\n\n\n"
 
 /***/ }),
 
@@ -2149,7 +2149,13 @@ var LatestDeviceComponent = (function () {
         this.dataStorageService = dataStorageService;
         this.route = route;
         this.router = router;
+        this.innerHeight = (window.screen.height);
+        this.innerWidth = (window.screen.width);
     }
+    LatestDeviceComponent.prototype.onResize = function (event) {
+        this.innerWidth = event.target.innerWidth;
+        console.log('iiii', this.innerWidth);
+    };
     LatestDeviceComponent.prototype.onScrollEvent = function ($event) {
         //console.log($event);
         //console.log($event.target.scrollingElement.scrollTop);
@@ -2178,6 +2184,12 @@ var LatestDeviceComponent = (function () {
     };
     return LatestDeviceComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:resize', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], LatestDeviceComponent.prototype, "onResize", null);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:scroll', ['$event']),
     __metadata("design:type", Function),
